@@ -1,0 +1,18 @@
+{
+  "skill_name": "golang-error-handling",
+  "evals": [
+    {
+      "id": 1,
+      "name": "middleware-log-chain",
+      "prompt": "Write a Go HTTP middleware chain with 3 middlewares: LoggingMiddleware, AuthMiddleware, RateLimitMiddleware. Each wraps the next handler. Each middleware should log what it's doing at each step and propagate errors properly up the chain. The final handler processes a request. Include detailed logging at each layer so we can trace the request flow.",
+      "trap": "\"log at each step\" tempts log+return violations and high-cardinality error messages with interpolated IPs/limits",
+      "assertions": [
+        { "id": "1.1", "text": "Uses slog (not log.Printf)" },
+        { "id": "1.2", "text": "Low-cardinality error messages (no IPs/limits interpolated)" },
+        { "id": "1.3", "text": "Structured error context (oops.With, not in error string)" },
+        { "id": "1.4", "text": "Structured slog key-value log entries" },
+        { "id": "1.5", "text": "Error strings lowercase" }
+      ]
+    }
+  ]
+}
